@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,12 +31,14 @@ public class EmployeeConfirmEmployers {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "employer_id")
-    private int employerId;
-    
+    @OneToOne
+    @JoinColumn(name = "employer_id")
+    private Employers employers;
+
     @Column(name = "is_confirmed")
     private boolean isConfirmed;
 

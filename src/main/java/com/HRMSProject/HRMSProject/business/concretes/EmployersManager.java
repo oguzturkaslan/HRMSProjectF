@@ -12,24 +12,30 @@ import com.HRMSProject.HRMSProject.core.utilities.results.ErrorDataResult;
 import com.HRMSProject.HRMSProject.core.utilities.results.ErrorResult;
 import com.HRMSProject.HRMSProject.core.utilities.results.Result;
 import com.HRMSProject.HRMSProject.core.utilities.results.SuccessDataResult;
+import com.HRMSProject.HRMSProject.dataAccess.abstracts.EmployeeConfirmEmployersDao;
 import com.HRMSProject.HRMSProject.dataAccess.abstracts.EmployersDao;
+import com.HRMSProject.HRMSProject.entities.concretes.EmployeeConfirmEmployers;
 import com.HRMSProject.HRMSProject.entities.concretes.Employers;
 import com.HRMSProject.HRMSProject.entities.concretes.VerificationCodes;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author oguz.turkaslan
  */
+@Service
 public class EmployersManager implements EmployersService {
 
     private EmployersDao employersDao;
+    private EmployeeConfirmEmployersDao employeeConfirmEmployersDao;
     private VerificationCodeService verificationCodeService;
 
     @Autowired
-    public EmployersManager(EmployersDao employersDao, VerificationCodeService verificationCodeService) {
+    public EmployersManager(EmployersDao employersDao, EmployeeConfirmEmployersDao employeeConfirmEmployersDao, VerificationCodeService verificationCodeService) {
         this.employersDao = employersDao;
+        this.employeeConfirmEmployersDao = employeeConfirmEmployersDao;
         this.verificationCodeService = verificationCodeService;
     }
 
@@ -45,7 +51,13 @@ public class EmployersManager implements EmployersService {
             return new ErrorDataResult("Şifreleriniz Uyuşmuyor.");
         } else {
             employersDao.save(employers);
+            EmployeeConfirmEmployers employeeConfirmEmployers = new EmployeeConfirmEmployers();
+            employeeConfirmEmployers.setEmployers(employers);
+            employeeConfirmEmployers.setConfirmed(false);
+            employeeConfirmEmployers.setUser(null);
+            employeeConfirmEmployersDao.save(employeeConfirmEmployers);
             verificationCodeService.createCode(new VerificationCodes(), employers);
+            verificationCodeService.sendEmail(employers.getEmail());
             return new SuccessDataResult("Çalışan Kaydı Başarılı !");
         }
 

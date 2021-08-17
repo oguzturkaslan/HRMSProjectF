@@ -5,14 +5,14 @@
  */
 package com.HRMSProject.HRMSProject.dataAccess.abstracts;
 
-import com.HRMSProject.HRMSProject.entities.concretes.User;
+import com.HRMSProject.HRMSProject.entities.concretes.EmployeeConfirmEmployers;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author oguz.turkaslan
  */
-public interface UserDao extends JpaRepository<User, Integer> {
+public interface EmployeeConfirmEmployersDao extends JpaRepository<EmployeeConfirmEmployers, Integer> {
 
-    User getById(int userId);
+    EmployeeConfirmEmployers getByEmployers_Id(int employerId);
 }

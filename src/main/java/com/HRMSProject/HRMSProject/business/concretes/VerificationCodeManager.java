@@ -31,7 +31,7 @@ public class VerificationCodeManager implements VerificationCodeService {
         Random rand = new Random();
         int upperBound = 27654849;
 
-        code.getUser().setId(user.getId());
+        code.setUser(user);
         code.setVerificationType(String.valueOf(rand.nextInt(upperBound)));
 
         verificationCodeDao.save(code);
