@@ -9,8 +9,12 @@ import com.HRMSProject.HRMSProject.business.abstracts.JobTitleService;
 import com.HRMSProject.HRMSProject.core.utilities.results.DataResult;
 import com.HRMSProject.HRMSProject.entities.concretes.JobTitles;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +32,11 @@ public class JobTitleController {
     @GetMapping("/getall")
     public DataResult<List<JobTitles>> getAll() {
         return this.jobTitleService.getAll();
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> add(@Valid @RequestBody JobTitles jobTitles) {
+        return ResponseEntity.ok(jobTitleService.add(jobTitles));
     }
 
 }

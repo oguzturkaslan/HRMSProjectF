@@ -5,14 +5,13 @@
  */
 package com.HRMSProject.HRMSProject.dataAccess.abstracts;
 
-import com.HRMSProject.HRMSProject.entities.concretes.JobTitles;
+import com.HRMSProject.HRMSProject.entities.concretes.Jobs;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author oguz.turkaslan
  */
-public interface JobTitlesDao extends JpaRepository<JobTitles, Integer> {//Entity anotasyonu olan class ın adı ve bu classın gösterdiği tablonun primary keyinin tipi(sorguları hazırlarken kullanacağı için)
+public interface JobsDao extends JpaRepository<Jobs, Integer> {
 
-    JobTitles getByTitle(String title);
 }

@@ -6,6 +6,7 @@
 package com.HRMSProject.HRMSProject.business.abstracts;
 
 import com.HRMSProject.HRMSProject.core.utilities.results.DataResult;
+import com.HRMSProject.HRMSProject.core.utilities.results.Result;
 import com.HRMSProject.HRMSProject.entities.concretes.JobTitles;
 import java.util.List;
 
@@ -16,4 +17,6 @@ import java.util.List;
 public interface JobTitleService {
 
     DataResult<List<JobTitles>> getAll();
+
+    Result add(JobTitles jobTitles);
 }

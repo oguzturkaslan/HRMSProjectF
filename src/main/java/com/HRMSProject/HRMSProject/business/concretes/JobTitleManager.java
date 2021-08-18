@@ -7,7 +7,10 @@ package com.HRMSProject.HRMSProject.business.concretes;
 
 import com.HRMSProject.HRMSProject.business.abstracts.JobTitleService;
 import com.HRMSProject.HRMSProject.core.utilities.results.DataResult;
+import com.HRMSProject.HRMSProject.core.utilities.results.ErrorResult;
+import com.HRMSProject.HRMSProject.core.utilities.results.Result;
 import com.HRMSProject.HRMSProject.core.utilities.results.SuccessDataResult;
+import com.HRMSProject.HRMSProject.core.utilities.results.SuccessResult;
 import com.HRMSProject.HRMSProject.dataAccess.abstracts.JobTitlesDao;
 import com.HRMSProject.HRMSProject.entities.concretes.JobTitles;
 import java.util.List;
@@ -27,6 +30,16 @@ public class JobTitleManager implements JobTitleService {
     @Override
     public DataResult<List<JobTitles>> getAll() {
         return new SuccessDataResult<>(this.jobTitlesDao.findAll(), "Başlıklar Listelendi");
+    }
+
+    @Override
+    public Result add(JobTitles jobTitles) {
+        if(jobTitlesDao.getByTitle(jobTitles.getTitle())!=null){
+        return new ErrorResult("Bu İş Tanımı Zaten Mevcut !");
+        }
+        jobTitlesDao.save(jobTitles);
+        return new SuccessResult("Yeni İş Tanımı Eklendi !");
+
     }
 
 }
