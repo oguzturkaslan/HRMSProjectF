@@ -15,12 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  *
  * @author oguz.turkaslan
  */
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,6 +49,9 @@ public class Jobs {
 
     @Column(name = "lastdateofapplicate")
     private Date lastDateOfApplicate;
+
+    @Column(name = "is_active")
+    private boolean is_active;
 
     @ManyToOne
     @JoinColumn(name = "employer_id")
