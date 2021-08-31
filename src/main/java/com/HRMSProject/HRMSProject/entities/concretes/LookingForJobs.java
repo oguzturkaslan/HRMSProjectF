@@ -7,8 +7,11 @@
 package com.HRMSProject.HRMSProject.entities.concretes;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -40,5 +43,9 @@ public class LookingForJobs extends User {
 
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cv_id")
+    private CurriculumVitae curriculumVitae;
 
 }

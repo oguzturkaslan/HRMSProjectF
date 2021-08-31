@@ -5,7 +5,6 @@
  */
 package com.HRMSProject.HRMSProject.entities.concretes;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,24 +23,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "school")
-public class School {
+@Table(name = "programming_skills")
+public class ProgrammingSkills {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "school_name")
-    private String schoolName;
-
-    @Column(name = "department")
-    private String department;
-
-    @Column(name = "school_start_date")
-    private Date schoolStartDate;
-
-    @Column(name = "school_end_date")
-    private Date schoolEndDate;
-
+    @Column(name = "programming_name")
+    private String programmingName;
 }

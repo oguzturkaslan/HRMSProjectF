@@ -5,12 +5,15 @@
  */
 package com.HRMSProject.HRMSProject.entities.concretes;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -36,7 +39,7 @@ public class Experience {
     @Column(name = "company_name")
     private String companyName;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_title_id")
     private JobTitles jobTitle;
 
@@ -46,8 +49,8 @@ public class Experience {
     @Column(name = "end_date")
     private int end_date;
 
-    @ManyToOne
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id")
-    private CurriculumVitae curriculumVitae;
+    private List<CurriculumVitae> curriculumVitae;
 
 }

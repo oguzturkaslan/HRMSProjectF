@@ -42,7 +42,5 @@ public class Languages {
     @NotNull
     @Column(name = "level")
     private int level;
-    
-    
 
 }

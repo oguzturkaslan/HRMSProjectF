@@ -5,12 +5,14 @@
  */
 package com.HRMSProject.HRMSProject.entities.concretes;
 
-import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,24 +26,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "school")
-public class School {
+@Table(name = "personel_links")
+public class PersonelLinks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "school_name")
-    private String schoolName;
+    @Column(name = "github_link")
+    private String github_link;
 
-    @Column(name = "department")
-    private String department;
+    @Column(name = "linkedin_link")
+    private String linkedin_link;
 
-    @Column(name = "school_start_date")
-    private Date schoolStartDate;
-
-    @Column(name = "school_end_date")
-    private Date schoolEndDate;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cv_id")
+    private CurriculumVitae curriculumVitae;
 }
