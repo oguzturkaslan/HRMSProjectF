@@ -5,7 +5,8 @@
  */
 package com.HRMSProject.HRMSProject.entities.concretes;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -29,6 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "experience")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Experience {
 
     @Id
@@ -39,9 +40,8 @@ public class Experience {
     @Column(name = "company_name")
     private String companyName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "job_title_id")
-    private JobTitles jobTitle;
+    @Column(name = "position_name")
+    private String positionName;
 
     @Column(name = "start_date")
     private int start_date;
@@ -49,8 +49,9 @@ public class Experience {
     @Column(name = "end_date")
     private int end_date;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id")
-    private List<CurriculumVitae> curriculumVitae;
+    private CurriculumVitae curriculumVitae;
 
 }

@@ -6,12 +6,14 @@
  */
 package com.HRMSProject.HRMSProject.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -44,8 +46,9 @@ public class LookingForJobs extends User {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cv_id")
-    private CurriculumVitae curriculumVitae;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "lookingForJobs", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "cv_id")
+    private List<CurriculumVitae> curriculumVitae;
 
 }

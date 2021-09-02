@@ -5,6 +5,9 @@
  */
 package com.HRMSProject.HRMSProject.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,7 +33,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "curriculum_vitae")
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CurriculumVitae {
 
     @Id
@@ -38,18 +41,22 @@ public class CurriculumVitae {
     @Column(name = "id")
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "looking_for_jobs_id")
+    @ManyToOne
+    @JoinColumn(name = "looking_for_jobs_id", referencedColumnName = "user_id")
+    @JsonBackReference
     private LookingForJobs lookingForJobs;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "school_id")
     private List<School> school;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "languages_id")
     private List<Languages> languages;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personal_links_id")
     private PersonelLinks personelLinks;
@@ -60,10 +67,12 @@ public class CurriculumVitae {
     @Column(name = "introduction")
     private String introduction;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "experience_id")
     private List<Experience> experience;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "programming_skills_id")
     private List<ProgrammingSkills> programmingSkills;

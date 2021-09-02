@@ -5,6 +5,9 @@
  */
 package com.HRMSProject.HRMSProject.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "personel_links")
 public class PersonelLinks {
 
@@ -40,6 +44,7 @@ public class PersonelLinks {
     @Column(name = "linkedin_link")
     private String linkedin_link;
 
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id")
     private CurriculumVitae curriculumVitae;
